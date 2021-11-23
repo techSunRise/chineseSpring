@@ -16,7 +16,8 @@ import org.springframework.lang.Nullable;
 public interface BeanFactory {
 
 	/**
-	 * 引用工厂Bean(例如:)
+	 * 使用BeanFactory的getBean时,如果该Bean实例是一个工厂类(FactoryBean类型),则调用该对象的getObject方法
+	 * 返回这个工厂实例生产的产品,如果调用getBean时加上&则返回该工厂实例本身
 	 */
 	String FACTORY_BEAN_PREFIX = "&";
 
@@ -31,7 +32,7 @@ public interface BeanFactory {
 	<T> T getBean(String name, @Nullable Class<T> requiredType) throws BeansException;
 
 	/**
-	 * 根据name找到相应的Bean，并调用有参构造函数进行初始化
+	 * 根据name找到相应的Bean,并调用有参构造函数进行初始化
 	 */
 	Object getBean(String name, Object... args) throws BeansException;
 
@@ -41,7 +42,7 @@ public interface BeanFactory {
 	<T> T getBean(Class<T> requiredType) throws BeansException;
 
 	/**
-	 * 根据类型找到相应的Bean，并调用有参构造函数进行初始化
+	 * 根据类型找到相应的Bean,并调用有参构造函数进行初始化
 	 */
 	<T> T getBean(Class<T> requiredType, Object... args) throws BeansException;
 
